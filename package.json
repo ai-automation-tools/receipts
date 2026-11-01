@@ -1,0 +1,22 @@
+{
+  "name": "receipts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A local browser extension that checks each claim in a Google AI Overview against the page it cites.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Mike Schecht",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "node --test",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "globals": "^16.5.0"
+  }
+}

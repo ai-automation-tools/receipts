@@ -1,0 +1,6 @@
+{
+  "manifest_version": 3,
+  "name": "Receipts",
+  "version": "0.0.0",
+  "description": "Checks each claim in a Google AI Overview against the page it cites, and shows the passage it found or says it found none."
+}
