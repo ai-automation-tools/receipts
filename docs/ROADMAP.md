@@ -13,7 +13,7 @@
 ---
 
 The Receipts Weekly Roadmap routine works this file top to bottom every Monday, Wednesday and
-Friday: it takes the first open item that isn't `🔒 Needs Mike` (or up to six `small` ones),
+Friday: it takes the first open item that isn't `🔒 Needs owner` (or up to six `small` ones),
 builds it, ticks it and opens a `roadmap/auto-<date>` PR. **Every item above
 `## After public release` is a release gate.** Receipts goes public when all of them are ticked
 and Mike says so. Ticking an item adds its line to the [changelog](CHANGELOG.md) and updates
@@ -21,7 +21,7 @@ any doc it made stale, in the same commit.
 
 Markers: `- [ ]` open, `- [-]` claimed by a run in progress, `- [x]` done, `- [!]` blocked
 (the reason follows on the line). `small` marks docs, config or assets a run can batch, up to
-six per PR (untagged means a feature, one per run); `🔒 Needs Mike` marks one only Mike can do.
+six per PR (untagged means a feature, one per run); `🔒 Needs owner` marks one only the owner can do.
 
 The slices come from [product/build-plan.md](product/build-plan.md), which marks Slices 0 to 6
 as the MVP. They are packed into three features above the line: the matcher with its eval
@@ -61,7 +61,7 @@ Nothing below blocks go-live.
 ### 🧩 Next slices
 
 - [ ] **P1: Firefox build.** The same extension packaged for Firefox, with the network-recording test passing there too.
-- [ ] **P4: live-markup canary.** A scheduled CI job loads a real Google results page and fails when the content script stops finding the overview. Only once Mike confirms it is allowed by Google's terms and by the sandbox the roadmap runs in. 🔒 Needs Mike
+- [ ] **P4: live-markup canary.** A scheduled CI job loads a real Google results page and fails when the content script stops finding the overview. Only once Mike confirms it is allowed by Google's terms and by the sandbox the roadmap runs in. 🔒 Needs owner
 - [ ] **P2: in-browser NLI tier.** Only if the eval shows lexical matching can't reach the precision gate on paraphrase, and only after ADR-001 is amended: opt-in, off by default, documented as a changed privacy statement.
 - [ ] **P3: other surfaces.** Perplexity, then Bing Copilot, each behind its own saved fixtures and the same network test.
 - [ ] `small` **Keyboard shortcut (C1).** One shortcut runs Check on the current tab, listed in the README.
@@ -70,11 +70,11 @@ Nothing below blocks go-live.
 ### 📣 Publish and promote
 
 - [ ] `small` **Store listing kit.** `npm run package` writes a zip of `dist/extension/`; store listing text and three screenshots of the popup on the saved fixtures live in `docs/store/`.
-- [ ] Chrome Web Store developer account and submission (one-time fee, reported as $5). 🔒 Needs Mike
-- [ ] Edge Add-ons submission. 🔒 Needs Mike
-- [ ] Launch posts: Show HN, GEO and SEO communities, and a note to the WashU audit's authors. 🔒 Needs Mike
-- [ ] Custom subdomain `receipts-demo.ai-automation-tools.dev`. 🔒 Needs Mike
-- [ ] On 2027-03-31, run the stop test from the decision memo: under 100 installs and under 50 GitHub stars combined means stop feature work and keep the repo in maintenance only. 🔒 Needs Mike
+- [ ] Chrome Web Store developer account and submission (one-time fee, reported as $5). 🔒 Needs owner
+- [ ] Edge Add-ons submission. 🔒 Needs owner
+- [ ] Launch posts: Show HN, GEO and SEO communities, and a note to the WashU audit's authors. 🔒 Needs owner
+- [ ] Custom subdomain `receipts-demo.ai-automation-tools.dev`. 🔒 Needs owner
+- [ ] On 2027-03-31, run the stop test from the decision memo: under 100 installs and under 50 GitHub stars combined means stop feature work and keep the repo in maintenance only. 🔒 Needs owner
 
 ---
 
