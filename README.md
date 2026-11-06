@@ -33,9 +33,9 @@
 ---
 
 > [!WARNING]
-> **Nothing runs yet.** This is the scaffold: `npm run build` produces an empty Manifest V3
-> extension that loads but does nothing. The matcher, its accuracy numbers and the check flow
-> land one roadmap item at a time. See the [roadmap](docs/ROADMAP.md).
+> **The extension doesn't check anything yet.** `npm run build` produces a Manifest V3
+> extension that loads but does nothing. The matcher and its eval are in (`npm run eval`); the
+> check flow and the demo land one roadmap item at a time. See the [roadmap](docs/ROADMAP.md).
 
 ## 💡 What it's for
 
@@ -55,14 +55,36 @@ each claim by shared words and figures. Every claim gets one of four statuses:
 | **unreachable** | The cited page didn't load. |
 
 There's no model, no API key, no account and no server. Nothing leaves your browser except the
-requests for the cited pages. The matcher's measured precision and recall will be published
-here, regenerated from a labeled test set, before the first release.
+requests for the cited pages.
+
+## 🎯 Measured accuracy
+
+`npm run eval` runs every hand-labeled claim/source pair in
+[`tests/fixtures/eval/`](tests/fixtures/eval/README.md) through `src/matcher.js`, the same file
+the extension runs, and prints this table. `npm run eval -- --readme` writes it here, and a test
+fails when the table below is out of date.
+
+<!-- eval:start -->
+50 hand-labeled claim/source pairs from 6 saved public pages.
+
+| Status | Expected | Predicted | Precision | Recall | False-positive rate |
+|:---|---:|---:|---:|---:|---:|
+| `found` | 28 | 31 | 0.81 | 0.89 | 0.27 |
+| `conflict` | 12 | 10 | 0.90 | 0.75 | 0.03 |
+| `not located` | 10 | 9 | 0.67 | 0.60 | 0.07 |
+| any flag (not `found`) | 22 | 19 | 0.84 | 0.73 | 0.11 |
+<!-- eval:end -->
+
+Read it with care: the set is small, its claims and labels were written by the roadmap agent
+that wrote the matcher, and the thresholds aren't tuned yet (Slice 2 tunes them and adds the
+CI gate). A **flag** is any status but `found`; a flag is right when the page doesn't fully
+back the claim.
 
 ## 📊 Planned features
 
 | Feature | Status |
 |:---|:---|
-| **Matcher with published accuracy** | Planned (Slices 0-2). One dependency-free module, a 40-pair labeled eval, and a CI gate on flag precision. |
+| **Matcher with published accuracy** | Matcher and eval done (Slices 0-1): `src/matcher.js` and a 50-pair labeled eval. Tuned thresholds and the CI gate on flag precision come in Slice 2. |
 | **Extension check flow** | Planned (Slices 3-4). Content script, logged-out fetches of the cited pages, popup with the evidence, copy report. |
 | **Try-it demo** | Planned (Slice 5). Paste a claim and its source on GitHub Pages and run the same matcher, offline. |
 
@@ -70,7 +92,8 @@ here, regenerated from a labeled test set, before the first release.
 
 ```bash
 npm ci                                       # install dev dependencies
-npm run lint && npm test && npm run build    # what CI runs
+npm run lint && npm test && npm run build    # what CI runs, then npm run eval
+npm run eval                                 # matcher accuracy on the labeled pairs
 # then load dist/extension/ in chrome://extensions with "Load unpacked"
 ```
 
@@ -86,7 +109,7 @@ fetch pages with your logins, and won't keep a history. The full list is in the
 | Section | What's inside |
 |:---|:---|
 | [**📚 docs/**](docs/README.md) | The roadmap, changelog, product spec, build plan and ADRs. |
-| [**🧩 src/**](src/README.md) | The extension source and, from Slice 0, the shared matcher. |
+| [**🧩 src/**](src/README.md) | The extension source and the matcher it shares with the demo and the eval. |
 | [**🌐 site/**](site/index.html) | The demo page GitHub Pages will serve. A "coming soon" shell for now. |
 | [**🔒 SECURITY.md**](SECURITY.md) | How to report a vulnerability, and what counts as one here. |
 

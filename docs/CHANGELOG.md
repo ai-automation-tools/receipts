@@ -13,6 +13,15 @@
 
 Entries that close a roadmap item carry the roadmap phase in italics.
 
+## 2026-11-06
+
+**Added**
+- `src/matcher.js`, the shared lexical matcher: `score(claim, pageText)` finds the closest passage of up to three sentences by shared word stems, compares its figures with the claim's, and returns `found`, `conflict`, `not located` or `unreachable` with the passage and both figures. `npm run build` copies it into the extension. *Phase 1: Real fixtures and measured accuracy*
+- `npm run eval`: 50 hand-labeled claim/source pairs from six saved NASA, CDC and NOAA pages, scored through the matcher, with precision, recall and false-positive rate per status. CI runs it, and the README shows the table. *Phase 1: Real fixtures and measured accuracy*
+
+**Blocked**
+- The five saved Google AI Overview pages: Google answers an unattended run with an "enable JavaScript" page or a CAPTCHA. Asked Mike in `docs/OPEN-QUESTIONS.md`. *Phase 1: Real fixtures and measured accuracy*
+
 ## 2026-11-01
 
 **Added**
