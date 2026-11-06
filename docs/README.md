@@ -18,6 +18,7 @@
 
 | Document | What's inside |
 |:---|:---|
+| [**❓ OPEN-QUESTIONS.md**](OPEN-QUESTIONS.md) | Decisions the roadmap agent is waiting on from Mike. |
 | [**🗺️ ROADMAP.md**](ROADMAP.md) | Fixture capture, the measured matcher, the check flow and the release checklist above the line; store listings and later surfaces below it. |
 | [**📋 CHANGELOG.md**](CHANGELOG.md) | Every change, newest first. Roadmap items show up here the run they're ticked. |
 
