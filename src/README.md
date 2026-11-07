@@ -14,9 +14,10 @@
 | Path | What's inside |
 |:---|:---|
 | [**extension/**](extension/manifest.json) | The unpacked extension. Only a manifest so far; `npm run build` copies it to `dist/extension/`. |
+| [**matcher.js**](matcher.js) | `score(claim, pageText) -> { status, passage, figures }`: the closest passage of up to three sentences by shared word stems, then its figures against the claim's. `npm run build` copies it into the extension. |
 
-`src/matcher.js` arrives with the first roadmap item. It stays a plain ES module with no
-dependencies, because the extension, `site/` and `npm run eval` all import it
+`matcher.js` stays a plain ES module with no dependencies, no DOM and no `chrome.*`, because
+the extension, `site/` and `npm run eval` all import it
 ([ADR-002](../docs/decisions/adr-002-shared-matcher-module.md)).
 
 ---

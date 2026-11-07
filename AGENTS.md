@@ -31,11 +31,12 @@ Full spec: `docs/product/spec.md`. Slice order: `docs/product/build-plan.md`. De
   **npm**, not pnpm or yarn. Node 22 or newer for the scripts and tests; CI uses Node 22.
 - `src/extension/` is the unpacked extension. `npm run build` (`scripts/build.js`) checks the
   manifest is MV3 and copies the folder to `dist/extension/`, which is what gets loaded in
-  `chrome://extensions`. When `src/matcher.js` exists, the build copies it into the
-  extension too, so the extension runs the same file the eval scores.
+  `chrome://extensions`. The build copies `src/matcher.js` into the extension too, so the
+  extension runs the same file the eval scores.
 - `src/matcher.js` is a pure ES module with **no dependencies and no DOM or `chrome.*` use**,
   exporting `score(claim, pageText) -> { status, passage, figures }`. The extension, `site/`
-  and `npm run eval` all import it (ADR-002). Changes to it go through the eval first.
+  and `npm run eval` all import it (ADR-002). Changes to it go through the eval first: run
+  `npm run eval -- --readme` and commit the README table, or `npm test` fails.
 - Tests: `node:test` and `node:assert/strict`, files in `tests/*.test.js`. No Jest, no
   Vitest. Fixtures (saved Google pages, labeled eval pairs, cited-page HTML) live under
   `tests/fixtures/`. Tests never reach the internet.
@@ -49,13 +50,14 @@ Full spec: `docs/product/spec.md`. Slice order: `docs/product/build-plan.md`. De
 
 ## Verify
 
-Run all three from the repo root. All three must pass before a PR opens. Once `npm run eval`
-exists, CI runs it too and it must pass the precision gate.
+Run these from the repo root. All of them must pass before a PR opens. CI runs the same four.
+`npm run eval` prints the accuracy table; from Slice 2 it also fails under the precision gate.
 
 ```
 npm run lint
 npm test
 npm run build
+npm run eval
 ```
 
 ## Architecture decisions that are already made
