@@ -69,22 +69,23 @@ fails when the table below is out of date.
 
 | Status | Expected | Predicted | Precision | Recall | False-positive rate |
 |:---|---:|---:|---:|---:|---:|
-| `found` | 28 | 31 | 0.81 | 0.89 | 0.27 |
-| `conflict` | 12 | 10 | 0.90 | 0.75 | 0.03 |
-| `not located` | 10 | 9 | 0.67 | 0.60 | 0.07 |
-| any flag (not `found`) | 22 | 19 | 0.84 | 0.73 | 0.11 |
+| `found` | 28 | 30 | 0.83 | 0.89 | 0.23 |
+| `conflict` | 12 | 9 | 1.00 | 0.75 | 0.00 |
+| `not located` | 10 | 11 | 0.73 | 0.80 | 0.07 |
+| any flag (not `found`) | 22 | 20 | 0.85 | 0.77 | 0.11 |
 <!-- eval:end -->
 
 Read it with care: the set is small, its claims and labels were written by the roadmap agent
-that wrote the matcher, and the thresholds aren't tuned yet (Slice 2 tunes them and adds the
-CI gate). A **flag** is any status but `found`; a flag is right when the page doesn't fully
-back the claim.
+that wrote the matcher, and its thresholds were tuned on this same set, so expect lower numbers
+on new pages. A **flag** is any status but `found`; a flag is right when the page doesn't fully
+back the claim. `npm run eval` fails, and so does CI, when flag precision drops under 0.5 or
+`conflict` precision under 0.6.
 
 ## 📊 Planned features
 
 | Feature | Status |
 |:---|:---|
-| **Matcher with published accuracy** | Matcher and eval done (Slices 0-1): `src/matcher.js` and a 50-pair labeled eval. Tuned thresholds and the CI gate on flag precision come in Slice 2. |
+| **Matcher with published accuracy** | Done (Slices 0-2): `src/matcher.js`, a 50-pair labeled eval, thresholds tuned on it, and a CI gate on flag and `conflict` precision. |
 | **Extension check flow** | Planned (Slices 3-4). Content script, logged-out fetches of the cited pages, popup with the evidence, copy report. |
 | **Try-it demo** | Planned (Slice 5). Paste a claim and its source on GitHub Pages and run the same matcher, offline. |
 
