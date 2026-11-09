@@ -1,5 +1,6 @@
 // npm run eval: scores every labeled claim/source pair in tests/fixtures/eval/ through
 // src/matcher.js and prints precision, recall and false-positive rate per status as Markdown.
+// It exits non-zero when the precision gate (GATE) fails, which fails CI.
 // `npm run eval -- --readme` also writes the table into README.md between the eval markers.
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -54,6 +55,25 @@ export function runEval(pairs = loadPairs()) {
   return { results, table: lines.join("\n") };
 }
 
+// The precision gate (spec M4, the decision memo's quality bar). Never lower these to pass:
+// a miss is the memo's falsifier, and the call is Mike's.
+export const GATE = { flag: 0.5, conflict: 0.6 };
+
+// One message per gate the results miss; empty when the gate passes. A status never predicted
+// has no precision to miss.
+export function gateFailures(results) {
+  const precision = (isPredicted, isRight) => {
+    const predicted = results.filter(isPredicted);
+    return predicted.length ? predicted.filter(isRight).length / predicted.length : 1;
+  };
+  const flag = precision((r) => r.got !== "found", (r) => r.label !== "supported");
+  const conflict = precision((r) => r.got === "conflict", (r) => r.expected === "conflict");
+  const failures = [];
+  if (flag < GATE.flag) failures.push(`flag precision ${flag.toFixed(2)} is under ${GATE.flag}`);
+  if (conflict < GATE.conflict) failures.push(`conflict precision ${conflict.toFixed(2)} is under ${GATE.conflict}`);
+  return failures;
+}
+
 export function withTable(readme, table) {
   const start = readme.indexOf(README_START);
   const end = readme.indexOf(README_END);
@@ -64,8 +84,12 @@ export function withTable(readme, table) {
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const { table } = runEval();
+  const { results, table } = runEval();
   console.log(table);
+  const failures = gateFailures(results);
+  for (const failure of failures) console.error(`Precision gate failed: ${failure}`);
+  if (failures.length) process.exitCode = 1;
+  else console.log(`\nPrecision gate passed (flag >= ${GATE.flag}, conflict >= ${GATE.conflict}).`);
   if (process.argv.includes("--readme")) {
     const path = join(root, "README.md");
     writeFileSync(path, withTable(readFileSync(path, "utf8"), table));

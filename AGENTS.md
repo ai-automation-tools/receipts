@@ -51,7 +51,8 @@ Full spec: `docs/product/spec.md`. Slice order: `docs/product/build-plan.md`. De
 ## Verify
 
 Run these from the repo root. All of them must pass before a PR opens. CI runs the same four.
-`npm run eval` prints the accuracy table; from Slice 2 it also fails under the precision gate.
+`npm run eval` prints the accuracy table and fails under the precision gate (flag 0.5,
+conflict 0.6, `GATE` in `scripts/eval.js`).
 
 ```
 npm run lint

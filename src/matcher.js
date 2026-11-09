@@ -2,9 +2,12 @@
 // Pure ES module with no dependencies, no DOM and no chrome.* (ADR-002): the extension, the
 // demo and `npm run eval` all import this file. Change it only with the eval run before and after.
 
-// Thresholds are first guesses; Slice 2 tunes them on the eval set.
-export const FOUND_COVERAGE = 0.6; // share of the claim's words a passage must contain
-export const CONFLICT_COVERAGE = 0.5; // a figure conflict needs a passage this close
+// Tuned on the eval set (2026-11-09) with a grid over FOUND_COVERAGE 0.40-0.85, CONFLICT_COVERAGE
+// 0.30-0.85 and WINDOW 1-4: FOUND_COVERAGE 0.65-0.80 with CONFLICT_COVERAGE 0.55 all score 42 of
+// 50 pairs right, against 40 for the first guesses (0.6, 0.5). 0.70 sits mid-plateau. Fifty pairs
+// is a small set, so re-run the sweep when the set grows rather than chase single pairs.
+export const FOUND_COVERAGE = 0.7; // share of the claim's words a passage must contain
+export const CONFLICT_COVERAGE = 0.55; // a figure conflict needs a passage this close
 const WINDOW = 3; // a passage is up to this many consecutive sentences
 
 const STOPWORDS = new Set(

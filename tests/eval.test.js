@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
-import { EXPECTED, loadPairs, runEval, withTable } from "../scripts/eval.js";
+import { EXPECTED, GATE, gateFailures, loadPairs, runEval, withTable } from "../scripts/eval.js";
 
 const pairs = loadPairs();
 const readme = readFileSync(new URL("../README.md", import.meta.url), "utf8");
@@ -22,6 +22,22 @@ test("the eval set has 40 or more labeled pairs, each with its source and date",
 
 test("every label is used", () => {
   assert.deepEqual(new Set(pairs.map((p) => p.label)), new Set(Object.keys(EXPECTED)));
+});
+
+test("the matcher passes the precision gate on the eval set", () => {
+  assert.deepEqual(GATE, { flag: 0.5, conflict: 0.6 });
+  assert.deepEqual(gateFailures(runEval(pairs).results), []);
+});
+
+test("the gate fails when flags or conflicts are mostly wrong", () => {
+  const r = (label, got) => ({ label, expected: EXPECTED[label], got });
+  assert.deepEqual(gateFailures([r("supported", "conflict"), r("conflict", "conflict"), r("supported", "found")]), [
+    "conflict precision 0.50 is under 0.6",
+  ]);
+  assert.deepEqual(gateFailures([r("supported", "not located"), r("supported", "not located"), r("absent", "not located")]), [
+    "flag precision 0.33 is under 0.5",
+  ]);
+  assert.deepEqual(gateFailures([r("supported", "found")]), []);
 });
 
 test("the README shows the current eval table", () => {

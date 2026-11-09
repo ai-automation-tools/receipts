@@ -13,6 +13,14 @@
 
 Entries that close a roadmap item carry the roadmap phase in italics.
 
+## 2026-11-09
+
+**Added**
+- The precision gate: `npm run eval` exits non-zero, failing CI, when flag precision drops under 0.5 or `conflict` precision under 0.6, and a test holds the matcher to it. *Phase 1: Real fixtures and measured accuracy*
+
+**Changed**
+- Matcher thresholds tuned on the eval set with a grid sweep: `FOUND_COVERAGE` 0.6 to 0.7 and `CONFLICT_COVERAGE` 0.5 to 0.55. Correct statuses rise from 40 to 42 of 50, flag precision from 0.84 to 0.85 and `conflict` precision from 0.90 to 1.00. *Phase 1: Real fixtures and measured accuracy*
+
 ## 2026-11-06
 
 **Added**
