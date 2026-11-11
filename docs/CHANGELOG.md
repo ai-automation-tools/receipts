@@ -13,6 +13,11 @@
 
 Entries that close a roadmap item carry the roadmap phase in italics.
 
+## 2026-11-11
+
+**Docs**
+- Roadmap rechecked against the org's 2026-11 requirements: the intro names the roadmap routine instead of its days; Slices 3-4 are marked blocked on the saved Google pages, so a run moves on to the release items that need only the manifest and the matcher; a `small` build-stamp item, and the live-demo item stamps the build.
+
 ## 2026-11-09
 
 **Added**

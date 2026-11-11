@@ -12,9 +12,9 @@
 
 ---
 
-The Receipts Weekly Roadmap routine works this file top to bottom every Monday, Wednesday and
-Friday: it takes the first open item that isn't `🔒 Needs owner` (or up to six `small` ones),
-builds it, ticks it and opens a `roadmap/auto-<date>` PR. **Every item above
+The Receipts roadmap routine works this file top to bottom, one item per run, as `roadmap/auto-`
+PRs: it takes the first open item that isn't `🔒 Needs owner` (or up to six `small` ones),
+builds it and ticks it. **Every item above
 `## After public release` is a release gate.** Receipts goes public when all of them are ticked
 and Mike says so. Ticking an item adds its line to the [changelog](CHANGELOG.md) and updates
 any doc it made stale, in the same commit.
@@ -42,7 +42,7 @@ precise enough to ship (by 2026-11-20). No extension code until both are known.
 
 ## 🧩 Phase 2: Extension check flow
 
-- [ ] **Slices 3-4: the check flow.** A content script on `https://www.google.com/search*` finds the overview by its visible heading, splits it into claims (6+ words, at most 15) and pairs each with its cited links, unwrapping `/url?q=` redirects; tests over every saved page extract the same claim/link pairs. The service worker fetches each cited page with `credentials: "omit"`, an 8 s timeout and a 600,000-character read cap, and scores it through `src/matcher.js`. The popup lists flagged claims first, shows each status with its passage and domain (and both figures on a `conflict`), says "no close passage found in the pages Google cited" for `not located`, says so and disables Check on a page with no overview, and copies a plain-text report. Host access (`https://*/*`) is optional and requested on the first Check; declining explains that nothing was checked. A test records every network request during a check on the fixtures and fails on any host that isn't a cited URL ([ADR-001](decisions/adr-001-local-only.md)). No page text reaches `innerHTML`. Permissions are only `storage`, the content script match and the optional host access. `npm run build` produces a `dist/extension/` that loads unpacked in Chrome and Edge.
+- [!] **Slices 3-4: the check flow.** A content script on `https://www.google.com/search*` finds the overview by its visible heading, splits it into claims (6+ words, at most 15) and pairs each with its cited links, unwrapping `/url?q=` redirects; tests over every saved page extract the same claim/link pairs. The service worker fetches each cited page with `credentials: "omit"`, an 8 s timeout and a 600,000-character read cap, and scores it through `src/matcher.js`. The popup lists flagged claims first, shows each status with its passage and domain (and both figures on a `conflict`), says "no close passage found in the pages Google cited" for `not located`, says so and disables Check on a page with no overview, and copies a plain-text report. Host access (`https://*/*`) is optional and requested on the first Check; declining explains that nothing was checked. A test records every network request during a check on the fixtures and fails on any host that isn't a cited URL ([ADR-001](decisions/adr-001-local-only.md)). No page text reaches `innerHTML`. Permissions are only `storage`, the content script match and the optional host access. `npm run build` produces a `dist/extension/` that loads unpacked in Chrome and Edge. — blocked: needs the five saved Google pages above, which wait on the 2026-11-13 falsifier decision
 
 ## 🚦 Public release
 
@@ -52,7 +52,8 @@ precise enough to ship (by 2026-11-20). No extension code until both are known.
 - [x] `small` **Secret scan.** `gitleaks git . --log-opts=--all` comes back clean on the full history. — done 2026-11-01: clean on the scaffold commit
 - [ ] `small` **README usage matches the code.** How to build and load the extension unpacked, what each status means, the accuracy table regenerated from `npm run eval`, and every command run against the real build and behaving as written. The README states the spec's Won't list plainly, so nobody files an issue asking for a "true/false" verdict, an LLM, or Bing support.
 - [ ] `small` **Privacy and permissions.** A README privacy statement that matches ADR-001 word for word in substance (nothing leaves the browser except fetches of the cited pages, logged out; no analytics, no key, no server) and a permissions table listing every permission in `src/extension/manifest.json` with why it's needed. A test fails if the manifest gains a permission the table doesn't list.
-- [ ] **Live demo at `https://ai-automation-tools.dev/receipts/`** (Slice 5). Paste a claim and its source text, click Check, and see the status and quoted passage from the same `src/matcher.js` the extension and the eval use, with no network call. Three canned examples, one click each (a `found`, a `conflict`, a `not located`), all built from public pages and holding no personal data. An `actions/deploy-pages` workflow publishes `site/` with the matcher copied in, and the page works offline after first load. The page keeps the source bar and app-icon favicon from the shell, is keyboard operable, never shows status by colour alone, and the README hero's Live Demo badge points at it.
+- [ ] `small` **Build stamp.** `<meta name="build" content="__BUILD_SHA__">` in `site/index.html`'s `<head>`
+- [ ] **Live demo at `https://ai-automation-tools.dev/receipts/`** (Slice 5). Paste a claim and its source text, click Check, and see the status and quoted passage from the same `src/matcher.js` the extension and the eval use, with no network call. Three canned examples, one click each (a `found`, a `conflict`, a `not located`), all built from public pages and holding no personal data. An `actions/deploy-pages` workflow publishes `site/` with the matcher copied in, replacing `__BUILD_SHA__` with `${{ github.sha }}` before the upload, and the page works offline after first load. The page keeps the source bar and app-icon favicon from the shell, is keyboard operable, never shows status by colour alone, and the README hero's Live Demo badge points at it.
 
 ## After public release
 
