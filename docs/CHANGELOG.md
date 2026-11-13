@@ -13,6 +13,15 @@
 
 Entries that close a roadmap item carry the roadmap phase in italics.
 
+## 2026-11-13
+
+**Added**
+- README privacy statement matching ADR-001 and a permissions table, with `tests/permissions.test.js` failing if the manifest asks for a permission the table doesn't list. *Public release*
+- `<meta name="build" content="__BUILD_SHA__">` in the demo page's `<head>`, for the deploy workflow to stamp. *Public release*
+
+**Docs**
+- README usage matches the code: how to build and load the extension unpacked in Chrome or Edge, the contributor checks CI runs, and the spec's full Won't list. *Public release*
+
 ## 2026-11-11
 
 **Docs**

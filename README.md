@@ -57,6 +57,29 @@ each claim by shared words and figures. Every claim gets one of four statuses:
 There's no model, no API key, no account and no server. Nothing leaves your browser except the
 requests for the cited pages.
 
+## 🔒 Privacy
+
+Nothing leaves your browser except the fetches of the pages Google cited, and those are made
+logged out: without your cookies or logins (`credentials: "omit"`). There are no analytics and
+no telemetry, no API key, no account, no server and no remote model. Your search, the overview
+text and the results stay on your device. This is a standing promise
+([ADR-001](docs/decisions/adr-001-local-only.md)): adding any other network call would be a
+changed privacy statement, opt-in and off by default, never a quiet update.
+
+### Permissions
+
+<!-- permissions:start -->
+| Permission | Kind | Why it's needed | In the manifest |
+|:---|:---|:---|:---|
+| `storage` | permission | Keeps the current check's results on your device while the popup is closed. Never synced. | Not yet (Slices 3-4) |
+| `https://www.google.com/search*` | content script match | Reads the AI Overview and its cited links on a Google results page, in your own tab. | Not yet (Slices 3-4) |
+| `https://*/*` | optional host permission | Fetches the cited pages, logged out. Asked for on your first Check, not at install; if you decline, nothing is checked. | Not yet (Slices 3-4) |
+<!-- permissions:end -->
+
+`src/extension/manifest.json` asks for no permissions today. The extension will never ask for
+one this table doesn't list: `tests/permissions.test.js` fails if the manifest gains one, and
+[SECURITY.md](SECURITY.md) counts it as a vulnerability.
+
 ## 🎯 Measured accuracy
 
 `npm run eval` runs every hand-labeled claim/source pair in
@@ -89,21 +112,54 @@ back the claim. `npm run eval` fails, and so does CI, when flag precision drops 
 | **Extension check flow** | Planned (Slices 3-4). Content script, logged-out fetches of the cited pages, popup with the evidence, copy report. |
 | **Try-it demo** | Planned (Slice 5). Paste a claim and its source on GitHub Pages and run the same matcher, offline. |
 
-## 🚀 Quick start (for contributors)
+## 🚀 Build and load it
+
+You need Node 22 or newer and npm.
 
 ```bash
-npm ci                                       # install dev dependencies
-npm run lint && npm test && npm run build    # what CI runs, then npm run eval
-npm run eval                                 # matcher accuracy on the labeled pairs
-# then load dist/extension/ in chrome://extensions with "Load unpacked"
+npm ci          # install the dev dependencies (lint tooling only; the extension has none)
+npm run build   # check the manifest is MV3, copy src/extension/ and src/matcher.js to dist/extension/
 ```
 
-## ⚠️ What it is not
+1. Open `chrome://extensions` in Chrome, or `edge://extensions` in Edge.
+2. Turn on **Developer mode**.
+3. Click **Load unpacked** and choose the `dist/extension/` folder.
+4. After each `npm run build`, click the reload icon on the Receipts card.
+
+Until the check flow lands (Slices 3-4), the loaded extension has no popup and no Check button.
+
+### Contributor checks
+
+CI runs these on every pull request, and all of them must pass:
+
+```bash
+npm run lint    # ESLint
+npm test        # node:test, offline
+npm run build   # writes dist/extension/
+npm run eval    # the accuracy table above; exits non-zero under the precision gate
+```
+
+After any change to `src/matcher.js`, run `npm run eval -- --readme` to rewrite the table above
+and commit it, or `npm test` fails.
+
+## ⚠️ What it won't do
 
 Receipts says whether the cited page contains the sentence. It doesn't say whether the
-sentence is true. It won't use an LLM, won't check Bing, Perplexity or ChatGPT search, won't
-fetch pages with your logins, and won't keep a history. The full list is in the
-[spec](docs/product/spec.md).
+sentence is true. This version won't add any of these, so please don't file an issue asking
+for one:
+
+- **"True" or "false" verdicts.** `not located` means no close passage was found in the pages
+  Google cited, never that the claim is wrong.
+- **An LLM or NLI model**, in the browser or remote. Lexical matching stays until the eval shows
+  it isn't enough.
+- **Other AI answers**: Bing Copilot, Perplexity, ChatGPT search or Google AI Mode. Google AI
+  Overviews only.
+- **Firefox or Safari builds** before the first release.
+- **Check history, sync, accounts, or a server** of any kind.
+- **Fetching pages with your cookies.** Cited pages are fetched logged out.
+- **A daily check cap, Pro tier, payments or licences.** It's free and MIT.
+
+The source of this list is the [spec](docs/product/spec.md).
 
 ## 📖 Documentation
 
