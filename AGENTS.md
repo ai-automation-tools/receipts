@@ -93,7 +93,7 @@ Carried from the spec. If a roadmap item seems to need one of these, stop and fl
 - **Permissions stay minimal**: `storage`, the content script on
   `https://www.google.com/search*`, and `https://*/*` as an optional host permission asked for
   on the first Check. Any new permission needs a README permissions-table line and a reason
-  in the PR body.
+  in the PR body; `tests/permissions.test.js` fails on a manifest permission the table lacks.
 - **Fetch limits** from the spec: 8 s timeout per page, 600,000-character read cap.
 - **Accessibility**: the popup and demo work from the keyboard, and a status is never shown by
   colour alone.
