@@ -13,6 +13,11 @@
 
 Entries that close a roadmap item carry the roadmap phase in italics.
 
+## 2026-11-16
+
+**Added**
+- The paste-in demo in `site/`: paste a claim and its source, or pick one of three canned examples from public NASA and NOAA pages (`found`, `conflict`, `not located`), and see the status, the closest passage and both figures from the same `src/matcher.js`, with no network call, working offline after the first load. `npm run build` writes it to `dist/site/` with the matcher, and `.github/workflows/pages.yml` stamps the build SHA and publishes it to `https://ai-automation-tools.dev/receipts/`; the README hero links it. *Public release*
+
 ## 2026-11-13
 
 **Added**

@@ -1,0 +1,43 @@
+name: Pages
+
+# Publishes the demo: `npm run build` copies site/ to dist/site/ with the shared src/matcher.js
+# beside it (ADR-002), the build stamp gets this commit's SHA, and dist/site/ goes to Pages.
+# The build uses only Node's standard library, so there's no npm ci.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run build
+      - run: sed -i "s/__BUILD_SHA__/${{ github.sha }}/" dist/site/index.html
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

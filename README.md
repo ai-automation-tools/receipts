@@ -19,6 +19,7 @@
 </p>
 
 <p align="center">
+  <a href="https://ai-automation-tools.dev/receipts/"><img src="https://img.shields.io/badge/Live_Demo-try_the_matcher-2ea44f?style=for-the-badge" alt="Live demo: try the matcher"></a>
   <img src="https://img.shields.io/badge/status-MVP_Prototype-F59E0B?style=for-the-badge" alt="Status: MVP prototype">
   <a href="docs/ROADMAP.md"><img src="https://img.shields.io/badge/plan-ROADMAP-8B5CF6?style=for-the-badge" alt="Roadmap"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2ea44f?style=for-the-badge" alt="License: MIT"></a>
@@ -34,8 +35,9 @@
 
 > [!WARNING]
 > **The extension doesn't check anything yet.** `npm run build` produces a Manifest V3
-> extension that loads but does nothing. The matcher and its eval are in (`npm run eval`); the
-> check flow and the demo land one roadmap item at a time. See the [roadmap](docs/ROADMAP.md).
+> extension that loads but does nothing. The matcher, its eval (`npm run eval`) and the
+> [paste-in demo](https://ai-automation-tools.dev/receipts/) are in; the check flow lands one
+> roadmap item at a time. See the [roadmap](docs/ROADMAP.md).
 
 ## 💡 What it's for
 
@@ -110,7 +112,7 @@ back the claim. `npm run eval` fails, and so does CI, when flag precision drops 
 |:---|:---|
 | **Matcher with published accuracy** | Done (Slices 0-2): `src/matcher.js`, a 50-pair labeled eval, thresholds tuned on it, and a CI gate on flag and `conflict` precision. |
 | **Extension check flow** | Planned (Slices 3-4). Content script, logged-out fetches of the cited pages, popup with the evidence, copy report. |
-| **Try-it demo** | Planned (Slice 5). Paste a claim and its source on GitHub Pages and run the same matcher, offline. |
+| **Try-it demo** | Built (Slice 5): [`site/`](site/index.html), published by `.github/workflows/pages.yml` to [ai-automation-tools.dev/receipts](https://ai-automation-tools.dev/receipts/). Paste a claim and its source, or pick one of three examples, and run the same matcher in your browser, offline after the first load. |
 
 ## 🚀 Build and load it
 
@@ -118,7 +120,8 @@ You need Node 22 or newer and npm.
 
 ```bash
 npm ci          # install the dev dependencies (lint tooling only; the extension has none)
-npm run build   # check the manifest is MV3, copy src/extension/ and src/matcher.js to dist/extension/
+npm run build   # check the manifest is MV3, copy src/extension/ and src/matcher.js to dist/extension/,
+                # and site/ with src/matcher.js to dist/site/ (the demo)
 ```
 
 1. Open `chrome://extensions` in Chrome, or `edge://extensions` in Edge.
@@ -128,6 +131,10 @@ npm run build   # check the manifest is MV3, copy src/extension/ and src/matcher
 
 Until the check flow lands (Slices 3-4), the loaded extension has no popup and no Check button.
 
+To try the demo locally, serve `dist/site/` with any static file server (it loads ES modules,
+so opening the file directly won't work), for example `python -m http.server -d dist/site`, and
+open `http://localhost:8000/`.
+
 ### Contributor checks
 
 CI runs these on every pull request, and all of them must pass:
@@ -135,7 +142,7 @@ CI runs these on every pull request, and all of them must pass:
 ```bash
 npm run lint    # ESLint
 npm test        # node:test, offline
-npm run build   # writes dist/extension/
+npm run build   # writes dist/extension/ and dist/site/
 npm run eval    # the accuracy table above; exits non-zero under the precision gate
 ```
 
@@ -167,7 +174,7 @@ The source of this list is the [spec](docs/product/spec.md).
 |:---|:---|
 | [**📚 docs/**](docs/README.md) | The roadmap, changelog, product spec, build plan and ADRs. |
 | [**🧩 src/**](src/README.md) | The extension source and the matcher it shares with the demo and the eval. |
-| [**🌐 site/**](site/index.html) | The demo page GitHub Pages will serve. A "coming soon" shell for now. |
+| [**🌐 site/**](site/index.html) | The paste-in demo GitHub Pages serves: the page, its script, three canned examples and an offline cache. The build adds `src/matcher.js`. |
 | [**🔒 SECURITY.md**](SECURITY.md) | How to report a vulnerability, and what counts as one here. |
 
 ---
