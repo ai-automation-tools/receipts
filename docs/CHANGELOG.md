@@ -13,6 +13,11 @@
 
 Entries that close a roadmap item carry the roadmap phase in italics.
 
+## 2026-11-16
+
+**Added**
+- Six saved Google AI Overview pages in `tests/fixtures/google/`, captured by hand and scrubbed of account and location data, with their queries, locale, dates and a re-capture procedure in its README. The 2026-11-13 falsifier is answered: real pages can be captured. *Phase 1*
+
 ## 2026-11-13
 
 **Added**
