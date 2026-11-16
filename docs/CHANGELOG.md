@@ -17,6 +17,7 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 
 **Added**
 - The paste-in demo in `site/`: paste a claim and its source, or pick one of three canned examples from public NASA and NOAA pages (`found`, `conflict`, `not located`), and see the status, the closest passage and both figures from the same `src/matcher.js`, with no network call, working offline after the first load. `npm run build` writes it to `dist/site/` with the matcher, and `.github/workflows/pages.yml` stamps the build SHA and publishes it to `https://ai-automation-tools.dev/receipts/`; the README hero links it. *Public release*
+- Six saved Google AI Overview pages in `tests/fixtures/google/`, captured by hand and scrubbed of account and location data, with their queries, locale, dates and a re-capture procedure in its README. The 2026-11-13 falsifier is answered: real pages can be captured. *Phase 1*
 
 ## 2026-11-13
 
