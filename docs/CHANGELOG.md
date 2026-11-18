@@ -13,6 +13,11 @@
 
 Entries that close a roadmap item carry the roadmap phase in italics.
 
+## 2026-11-17
+
+**Security**
+- The six Google fixtures no longer carry the browser key Google embeds in its results pages (a placeholder replaces it), and a `.gitleaksignore` covers the copies in history. It was Google's key, not this project's.
+
 ## 2026-11-16
 
 **Added**
