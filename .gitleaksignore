@@ -1,0 +1,11 @@
+# tests/fixtures/google/*.html are saved Google results pages. Commit a46779a6 added them
+# with the browser key Google embeds in every results page (the data-api attribute of
+# a "save-components-async" div). It is Google's key, not this project's, and it appears
+# in no code or config here. The fixtures now carry a placeholder; these lines cover the
+# copies in history.
+a46779a6e0710523d5109e171685d3067017435b:tests/fixtures/google/adult-exercise.html:gcp-api-key:4
+a46779a6e0710523d5109e171685d3067017435b:tests/fixtures/google/adult-sleep.html:gcp-api-key:4
+a46779a6e0710523d5109e171685d3067017435b:tests/fixtures/google/earth-water.html:gcp-api-key:44
+a46779a6e0710523d5109e171685d3067017435b:tests/fixtures/google/mars-distance.html:gcp-api-key:8
+a46779a6e0710523d5109e171685d3067017435b:tests/fixtures/google/moon-travel.html:gcp-api-key:35
+a46779a6e0710523d5109e171685d3067017435b:tests/fixtures/google/ocean-depth.html:gcp-api-key:4
