@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/now-phase_1:_fixtures_and_eval-F59E0B?style=for-the-badge" alt="Now: Phase 1, fixtures and eval">
+  <img src="https://img.shields.io/badge/now-phase_2:_extension_check_flow-F59E0B?style=for-the-badge" alt="Now: Phase 2, extension check flow">
   <img src="https://img.shields.io/badge/stage-incubating-2ea44f?style=for-the-badge" alt="Stage: incubating">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Back to docs"></a>
 </p>
@@ -42,7 +42,7 @@ precise enough to ship (by 2026-11-20). No extension code until both are known.
 
 ## 🧩 Phase 2: Extension check flow
 
-- [!] **Slices 3-4: the check flow.** A content script on `https://www.google.com/search*` finds the overview by its visible heading, splits it into claims (6+ words, at most 15) and pairs each with its cited links, unwrapping `/url?q=` redirects; tests over every saved page extract the same claim/link pairs. The service worker fetches each cited page with `credentials: "omit"`, an 8 s timeout and a 600,000-character read cap, and scores it through `src/matcher.js`. The popup lists flagged claims first, shows each status with its passage and domain (and both figures on a `conflict`), says "no close passage found in the pages Google cited" for `not located`, says so and disables Check on a page with no overview, and copies a plain-text report. Host access (`https://*/*`) is optional and requested on the first Check; declining explains that nothing was checked. A test records every network request during a check on the fixtures and fails on any host that isn't a cited URL ([ADR-001](decisions/adr-001-local-only.md)). No page text reaches `innerHTML`. Permissions are only `storage`, the content script match and the optional host access. `npm run build` produces a `dist/extension/` that loads unpacked in Chrome and Edge. — blocked: needs the five saved Google pages above, which wait on the 2026-11-13 falsifier decision
+- [ ] **Slices 3-4: the check flow.** A content script on `https://www.google.com/search*` finds the overview by its visible heading, splits it into claims (6+ words, at most 15) and pairs each with its cited links, unwrapping `/url?q=` redirects; tests over every saved page extract the same claim/link pairs. The service worker fetches each cited page with `credentials: "omit"`, an 8 s timeout and a 600,000-character read cap, and scores it through `src/matcher.js`. The popup lists flagged claims first, shows each status with its passage and domain (and both figures on a `conflict`), says "no close passage found in the pages Google cited" for `not located`, says so and disables Check on a page with no overview, and copies a plain-text report. Host access (`https://*/*`) is optional and requested on the first Check; declining explains that nothing was checked. A test records every network request during a check on the fixtures and fails on any host that isn't a cited URL ([ADR-001](decisions/adr-001-local-only.md)). No page text reaches `innerHTML`. Permissions are only `storage`, the content script match and the optional host access. `npm run build` produces a `dist/extension/` that loads unpacked in Chrome and Edge. — unblocked 2026-11-20: the six saved Google pages it was waiting on landed 2026-11-16 (PR #9), and the precision falsifier due 2026-11-20 passed (flag 0.85, `conflict` 1.00). Next feature once PR #7 merges
 
 ## 🚦 Public release
 
