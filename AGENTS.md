@@ -49,8 +49,9 @@ Full spec: `docs/product/spec.md`. Slice order: `docs/product/build-plan.md`. De
   by `tests/site.test.js` to score as labeled) and `sw.js`, a network-first offline cache whose
   `FILES` list must name every file the page loads. `.github/workflows/pages.yml` runs
   `npm run build`, stamps `__BUILD_SHA__` and publishes `dist/site/` to GitHub Pages at
-  `https://ai-automation-tools.dev/receipts/`. Keep every page path relative, and never add a
-  `CNAME` or set a custom domain: graduation does that.
+  `https://receipts-demo.ai-automation-tools.dev/` (custom domain set in the repo's Pages settings
+  2026-11-22, Mike's call; the old `ai-automation-tools.dev/receipts/` path redirects). Keep every page
+  path relative, and don't add a `CNAME` file: with the Actions source the setting is what counts.
 
 ## Verify
 
