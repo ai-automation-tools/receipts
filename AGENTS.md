@@ -32,7 +32,8 @@ Full spec: `docs/product/spec.md`. Slice order: `docs/product/build-plan.md`. De
 - `src/extension/` is the unpacked extension. `npm run build` (`scripts/build.js`) checks the
   manifest is MV3 and copies the folder to `dist/extension/`, which is what gets loaded in
   `chrome://extensions`. The build copies `src/matcher.js` into the extension too, so the
-  extension runs the same file the eval scores.
+  extension runs the same file the eval scores. It also copies `site/` to `dist/site/` with
+  `src/matcher.js` beside it; `site/` itself never holds a copy of the matcher.
 - `src/matcher.js` is a pure ES module with **no dependencies and no DOM or `chrome.*` use**,
   exporting `score(claim, pageText) -> { status, passage, figures }`. The extension, `site/`
   and `npm run eval` all import it (ADR-002). Changes to it go through the eval first: run
@@ -44,9 +45,12 @@ Full spec: `docs/product/spec.md`. Slice order: `docs/product/build-plan.md`. De
   webextension globals for `src/` and `site/`, Node globals for `scripts/` and `tests/`.
 - Runtime dependencies: none, and keep it that way. Dev dependencies need a line in the PR
   body saying why.
-- The demo lives in `site/`. GitHub Pages is not enabled yet; the live-demo item adds the
-  `actions/deploy-pages` workflow. Until then, don't add a Pages workflow, or CI on `main`
-  goes red.
+- The demo lives in `site/`: `index.html`, `demo.js`, the canned `examples.js` (each checked
+  by `tests/site.test.js` to score as labeled) and `sw.js`, a network-first offline cache whose
+  `FILES` list must name every file the page loads. `.github/workflows/pages.yml` runs
+  `npm run build`, stamps `__BUILD_SHA__` and publishes `dist/site/` to GitHub Pages at
+  `https://ai-automation-tools.dev/receipts/`. Keep every page path relative, and never add a
+  `CNAME` or set a custom domain: graduation does that.
 
 ## Verify
 
