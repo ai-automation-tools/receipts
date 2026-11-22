@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-  <a href="https://ai-automation-tools.dev/receipts/"><img src="https://img.shields.io/badge/Live_Demo-try_the_matcher-2ea44f?style=for-the-badge" alt="Live demo: try the matcher"></a>
+  <a href="https://receipts-demo.ai-automation-tools.dev/"><img src="https://img.shields.io/badge/Live_Demo-try_the_matcher-2ea44f?style=for-the-badge" alt="Live demo: try the matcher"></a>
   <img src="https://img.shields.io/badge/status-MVP_Prototype-F59E0B?style=for-the-badge" alt="Status: MVP prototype">
   <a href="docs/ROADMAP.md"><img src="https://img.shields.io/badge/plan-ROADMAP-8B5CF6?style=for-the-badge" alt="Roadmap"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2ea44f?style=for-the-badge" alt="License: MIT"></a>
@@ -36,7 +36,7 @@
 > [!WARNING]
 > **The extension doesn't check anything yet.** `npm run build` produces a Manifest V3
 > extension that loads but does nothing. The matcher, its eval (`npm run eval`) and the
-> [paste-in demo](https://ai-automation-tools.dev/receipts/) are in; the check flow lands one
+> [paste-in demo](https://receipts-demo.ai-automation-tools.dev/) are in; the check flow lands one
 > roadmap item at a time. See the [roadmap](docs/ROADMAP.md).
 
 ## 💡 What it's for
@@ -112,7 +112,7 @@ back the claim. `npm run eval` fails, and so does CI, when flag precision drops 
 |:---|:---|
 | **Matcher with published accuracy** | Done (Slices 0-2): `src/matcher.js`, a 50-pair labeled eval, thresholds tuned on it, and a CI gate on flag and `conflict` precision. |
 | **Extension check flow** | Planned (Slices 3-4). Content script, logged-out fetches of the cited pages, popup with the evidence, copy report. |
-| **Try-it demo** | Built (Slice 5): [`site/`](site/index.html), published by `.github/workflows/pages.yml` to [ai-automation-tools.dev/receipts](https://ai-automation-tools.dev/receipts/). Paste a claim and its source, or pick one of three examples, and run the same matcher in your browser, offline after the first load. |
+| **Try-it demo** | Built (Slice 5): [`site/`](site/index.html), published by `.github/workflows/pages.yml` to [receipts-demo.ai-automation-tools.dev](https://receipts-demo.ai-automation-tools.dev/). Paste a claim and its source, or pick one of three examples, and run the same matcher in your browser, offline after the first load. |
 
 ## 🚀 Build and load it
 

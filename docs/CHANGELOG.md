@@ -13,6 +13,11 @@
 
 Entries that close a roadmap item carry the roadmap phase in italics.
 
+## 2026-11-22
+
+**Changed**
+- The demo moved to `https://receipts-demo.ai-automation-tools.dev/` (Pages custom domain, HTTPS enforced); `ai-automation-tools.dev/receipts/` redirects there. README, `AGENTS.md` and the roadmap point at the new address, and the org landing page now has a Receipts card linking it. *(roadmap: Custom subdomain)*
+
 ## 2026-11-17
 
 **Security**
