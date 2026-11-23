@@ -1,7 +1,9 @@
 # Google AI Overview fixtures
 
 Six real Google results pages that show an AI Overview, for the content script's tests: each one
-must yield the same claim/link pairs every run. Saved by hand from a desktop Chrome session; an
+must yield the same claim/link pairs every run. Those pairs are in [`claims.json`](claims.json),
+which `tests/extension.test.js` compares with what `src/extension/content.js` extracts; each was
+read against the page by hand. Saved by hand from a desktop Chrome session; an
 unattended run can't capture them (a logged-out `curl` gets the "enable JavaScript" page, and
 headless or automated browsers get Google's "unusual traffic" page).
 
@@ -45,4 +47,6 @@ Do this when Google's markup changes and the content script stops finding the ov
    nothing.
 5. Check it: `grep -c "AI Overview" <file>` is at least 1, and the overview's figures and cited
    links are still in the file.
-6. Update the row's **Captured** date and figure, and run the tests.
+6. Update the row's **Captured** date and figure, and run the tests. The extraction test fails
+   with the claims it now finds: read them against the overview on the page, and if they match,
+   put them in the file's entry in `claims.json`.

@@ -34,10 +34,9 @@
 ---
 
 > [!WARNING]
-> **The extension doesn't check anything yet.** `npm run build` produces a Manifest V3
-> extension that loads but does nothing. The matcher, its eval (`npm run eval`) and the
-> [paste-in demo](https://receipts-demo.ai-automation-tools.dev/) are in; the check flow lands one
-> roadmap item at a time. See the [roadmap](docs/ROADMAP.md).
+> **Not in the Chrome Web Store yet.** Build it and load it unpacked (below). The check flow is
+> tested on six saved Google results pages; Google changes its markup, so if Check says a page
+> with an AI Overview has none, please [open an issue](https://github.com/ai-automation-tools/receipts/issues).
 
 ## 💡 What it's for
 
@@ -73,14 +72,15 @@ changed privacy statement, opt-in and off by default, never a quiet update.
 <!-- permissions:start -->
 | Permission | Kind | Why it's needed | In the manifest |
 |:---|:---|:---|:---|
-| `storage` | permission | Keeps the current check's results on your device while the popup is closed. Never synced. | Not yet (Slices 3-4) |
-| `https://www.google.com/search*` | content script match | Reads the AI Overview and its cited links on a Google results page, in your own tab. | Not yet (Slices 3-4) |
-| `https://*/*` | optional host permission | Fetches the cited pages, logged out. Asked for on your first Check, not at install; if you decline, nothing is checked. | Not yet (Slices 3-4) |
+| `https://www.google.com/search*` | content script match | Reads the AI Overview and its cited links on a Google results page, in your own tab. It only reads the page. | Yes |
+| `https://*/*` | optional host permission | Fetches the cited pages, logged out. Asked for on your first Check, not at install; if you decline, nothing is checked. | Yes, optional |
+| `storage` | permission | Would keep a check's results on your device while the popup is closed. Never synced. Nothing is stored today. | No |
 <!-- permissions:end -->
 
-`src/extension/manifest.json` asks for no permissions today. The extension will never ask for
-one this table doesn't list: `tests/permissions.test.js` fails if the manifest gains one, and
-[SECURITY.md](SECURITY.md) counts it as a vulnerability.
+The extension will never ask for a permission this table doesn't list:
+`tests/permissions.test.js` fails if the manifest gains one, and [SECURITY.md](SECURITY.md)
+counts it as a vulnerability. Cited `http://` pages show as `unreachable`, because the host
+permission covers `https://` only.
 
 ## 🎯 Measured accuracy
 
@@ -111,7 +111,7 @@ back the claim. `npm run eval` fails, and so does CI, when flag precision drops 
 | Feature | Status |
 |:---|:---|
 | **Matcher with published accuracy** | Done (Slices 0-2): `src/matcher.js`, a 50-pair labeled eval, thresholds tuned on it, and a CI gate on flag and `conflict` precision. |
-| **Extension check flow** | Planned (Slices 3-4). Content script, logged-out fetches of the cited pages, popup with the evidence, copy report. |
+| **Extension check flow** | Built (Slices 3-4): the content script reads the overview and its cited links, the service worker fetches each cited page logged out (8 s, 600,000 characters) and scores it with the matcher, and the popup lists flagged claims first with the passage, domain and figures, and copies a plain-text report. Tested on six saved Google pages, with a test that fails on any request to a page the overview doesn't cite. |
 | **Try-it demo** | Built (Slice 5): [`site/`](site/index.html), published by `.github/workflows/pages.yml` to [receipts-demo.ai-automation-tools.dev](https://receipts-demo.ai-automation-tools.dev/). Paste a claim and its source, or pick one of three examples, and run the same matcher in your browser, offline after the first load. |
 
 ## 🚀 Build and load it
@@ -119,7 +119,7 @@ back the claim. `npm run eval` fails, and so does CI, when flag precision drops 
 You need Node 22 or newer and npm.
 
 ```bash
-npm ci          # install the dev dependencies (lint tooling only; the extension has none)
+npm ci          # install the dev dependencies (lint and test tooling only; the extension has none)
 npm run build   # check the manifest is MV3, copy src/extension/ and src/matcher.js to dist/extension/,
                 # and site/ with src/matcher.js to dist/site/ (the demo)
 ```
@@ -129,11 +129,26 @@ npm run build   # check the manifest is MV3, copy src/extension/ and src/matcher
 3. Click **Load unpacked** and choose the `dist/extension/` folder.
 4. After each `npm run build`, click the reload icon on the Receipts card.
 
-Until the check flow lands (Slices 3-4), the loaded extension has no popup and no Check button.
-
 To try the demo locally, serve `dist/site/` with any static file server (it loads ES modules,
 so opening the file directly won't work), for example `python -m http.server -d dist/site`, and
 open `http://localhost:8000/`.
+
+### Use it
+
+1. Search Google for something factual and wait for the AI Overview. If it has **Show more**,
+   click it, so every claim is on the page.
+2. Click the Receipts icon in the toolbar. On a page with no AI Overview, the popup says so and
+   Check stays disabled.
+3. Click **Check**. The first time, the browser asks to let Receipts read and change data on
+   all `https://` sites; that is how it fetches the cited pages. Decline, and nothing is checked.
+4. The popup lists each claim (sentences of six or more words, at most 15) with its status and
+   the cited page's domain, flagged claims first: the passage it found, both figures on a
+   `conflict`, and "no close passage found in the pages Google cited" for `not located`. A claim
+   citing several pages gets the best status any of them gives. A citation chip that reads
+   "Space +4" counts as its first source only: the other four aren't links on the page until
+   you open the chip.
+5. **Copy report** puts a plain-text summary on the clipboard: the query, the date, and each
+   claim with its status, domain and passage.
 
 ### Contributor checks
 
