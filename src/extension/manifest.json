@@ -2,5 +2,21 @@
   "manifest_version": 3,
   "name": "Receipts",
   "version": "0.0.0",
-  "description": "Checks each claim in a Google AI Overview against the page it cites, and shows the passage it found or says it found none."
+  "description": "Checks each claim in a Google AI Overview against the page it cites, and shows the passage it found or says it found none.",
+  "action": {
+    "default_title": "Receipts: check this AI Overview",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.com/search*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "optional_host_permissions": ["https://*/*"]
 }

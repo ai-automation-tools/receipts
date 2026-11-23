@@ -34,13 +34,20 @@ Full spec: `docs/product/spec.md`. Slice order: `docs/product/build-plan.md`. De
   `chrome://extensions`. The build copies `src/matcher.js` into the extension too, so the
   extension runs the same file the eval scores. It also copies `site/` to `dist/site/` with
   `src/matcher.js` beside it; `site/` itself never holds a copy of the matcher.
+- The check flow: `content.js` (a classic script, since content scripts can't be modules) reads
+  the overview into pieces of text with the links cited after them; `background.js` (the module
+  service worker, importing `./matcher.js`) splits them into claims, fetches and scores; the
+  popup asks for host access and shows the results. `src/extension/` has no `matcher.js`, so
+  tests import the service worker from a fresh `build()` into a temp folder.
 - `src/matcher.js` is a pure ES module with **no dependencies and no DOM or `chrome.*` use**,
   exporting `score(claim, pageText) -> { status, passage, figures }`. The extension, `site/`
   and `npm run eval` all import it (ADR-002). Changes to it go through the eval first: run
   `npm run eval -- --readme` and commit the README table, or `npm test` fails.
 - Tests: `node:test` and `node:assert/strict`, files in `tests/*.test.js`. No Jest, no
   Vitest. Fixtures (saved Google pages, labeled eval pairs, cited-page HTML) live under
-  `tests/fixtures/`. Tests never reach the internet.
+  `tests/fixtures/`. Tests never reach the internet. `tests/extension.test.js` runs
+  `content.js` in a `node:vm` context over each saved Google page parsed by `linkedom` (a dev
+  dependency) and compares the claims with `tests/fixtures/google/claims.json`.
 - Lint: ESLint 9 flat config (`eslint.config.js`), `@eslint/js` recommended, with browser and
   webextension globals for `src/` and `site/`, Node globals for `scripts/` and `tests/`.
 - Runtime dependencies: none, and keep it that way. Dev dependencies need a line in the PR
@@ -70,8 +77,9 @@ npm run eval
 
 - **ADR-001: nothing leaves the browser except fetches of the cited pages.** No analytics, no
   API key, no server, no remote model. Cited pages are fetched with `credentials: "omit"`.
-  From Slice 4 on, a test records every network request during a check and fails on any host
-  that isn't a cited URL. Never weaken that test.
+  "a check contacts no host but the cited pages" in `tests/extension.test.js` records every
+  request a check on each saved Google page makes and fails on any URL the overview doesn't
+  cite; a scan beside it fails on any other way to make a request. Never weaken either test.
 - **ADR-002: one matcher module** shared by the extension, the demo and the eval. Never copy
   its code into another file.
 

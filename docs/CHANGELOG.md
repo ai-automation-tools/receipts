@@ -13,6 +13,14 @@
 
 Entries that close a roadmap item carry the roadmap phase in italics.
 
+## 2026-11-23
+
+**Added**
+- The extension checks an AI Overview. On a Google results page the content script reads the overview by its heading and pairs its text with the links cited after it; the service worker splits it into claims, fetches each cited page logged out (8 s timeout, 600,000-character cap) and scores it with `src/matcher.js`; the popup asks for host access on the first Check, lists flagged claims first with the passage, domain and both figures on a `conflict`, says "no close passage found in the pages Google cited" for `not located`, disables Check on a page with no overview, and copies a plain-text report. Tests run the content script over all six saved Google pages, and fail on any request a check makes to a page the overview doesn't cite. `linkedom` joins the dev dependencies to parse the saved pages in tests. *Phase 2*
+
+**Changed**
+- The live demo is ticked: the Pages workflow runs on `main` and `https://receipts-demo.ai-automation-tools.dev/` serves the stamped build. *Public release*
+
 ## 2026-11-22
 
 **Changed**
