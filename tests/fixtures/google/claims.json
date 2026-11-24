@@ -1,0 +1,54 @@
+{
+  "adult-exercise.html": [
+    {"text":"Adults need at least 150 minutes of moderate-intensity aerobic activity or 75 minutes of vigorous-intensity aerobic activity each week, along with muscle-strengthening activities on 2 or more days a week.","links":["https://www.cdc.gov/physical-activity-basics/guidelines/adults.html"]},
+    {"text":"Moderate-intensity (150 minutes/week): Activities like brisk walking, light cycling, or water aerobics (such as 30 minutes a day, 5 days a week).","links":["https://www.nhs.uk/live-well/exercise/physical-activity-guidelines-for-adults-aged-19-to-64/"]},
+    {"text":"Vigorous-intensity (75 minutes/week): Activities that make you breathe hard and fast, like running, swimming laps, or uphill hiking.","links":["https://www.nhs.uk/live-well/exercise/physical-activity-guidelines-for-adults-aged-19-to-64/"]},
+    {"text":"Combinations: You can mix moderate and vigorous intensity across the week.","links":["https://www.nhs.uk/live-well/exercise/physical-activity-guidelines-for-adults-aged-19-to-64/"]},
+    {"text":"More benefits: Increasing moderate activity to 300 minutes per week provides even greater health benefits.","links":["https://www.nhs.uk/live-well/exercise/physical-activity-guidelines-for-adults-aged-19-to-64/"]},
+    {"text":"Muscle-strengthening: Work all major muscle groups (legs, hips, back, abdomen, chest, shoulders, and arms) using weights, bands, or body weight at least 2 days a week.","links":["https://www.cdc.gov/physical-activity-basics/guidelines/adults.html","https://www.mayoclinic.org/healthy-lifestyle/fitness/expert-answers/exercise/faq-20057916","https://www.heart.org/en/healthy-living/exercise-and-physical-activity/fitness-basics/aha-recs-for-physical-activity-in-adults"]},
+    {"text":"You can break these minutes up into smaller chunks throughout the week—even short 5- or 10-minute bouts add up.","links":["https://www.cdc.gov/physical-activity-basics/guidelines/adults.html","https://www.mayoclinic.org/healthy-lifestyle/fitness/expert-answers/exercise/faq-20057916","https://www.heart.org/en/healthy-living/exercise-and-physical-activity/fitness-basics/aha-recs-for-physical-activity-in-adults"]},
+    {"text":"Detailed breakdowns and tips are available through the CDC Adult Activity Overview or the Mayo Clinic Exercise Guide.","links":["https://www.cdc.gov/physical-activity-basics/guidelines/adults.html","https://www.mayoclinic.org/healthy-lifestyle/fitness/expert-answers/exercise/faq-20057916","https://www.heart.org/en/healthy-living/exercise-and-physical-activity/fitness-basics/aha-recs-for-physical-activity-in-adults"]}
+  ],
+  "adult-sleep.html": [
+    {"text":"Adults generally need 7 to 9 hours of sleep per night, according to the National Sleep Foundation and the Centers for Disease Control and Prevention.","links":["https://www.thensf.org/how-many-hours-of-sleep-do-you-really-need/","https://www.cdc.gov/sleep/about/index.html"]},
+    {"text":"Recommendations can vary slightly depending on your specific age group and individual health needs:","links":["https://www.mayoclinic.org/healthy-lifestyle/adult-health/expert-answers/how-many-hours-of-sleep-are-enough/faq-20057898"]},
+    {"text":"Young adults and adults (18–64 years): Aim for 7 to 9 hours of sleep nightly.","links":["https://www.mayoclinic.org/healthy-lifestyle/adult-health/expert-answers/how-many-hours-of-sleep-are-enough/faq-20057898"]},
+    {"text":"Older adults (65+ years): Aim for 7 to 8 hours of sleep nightly, though individual needs may still vary.","links":["https://www.mayoclinic.org/healthy-lifestyle/adult-health/expert-answers/how-many-hours-of-sleep-are-enough/faq-20057898"]},
+    {"text":"Minimum threshold: Getting fewer than 7 hours of sleep on a regular basis is generally considered insufficient.","links":["https://www.mayoclinic.org/healthy-lifestyle/adult-health/expert-answers/how-many-hours-of-sleep-are-enough/faq-20057898"]},
+    {"text":"Quality matters just as much as quantity: Fragmented or frequently interrupted sleep leaves you feeling unrefreshed, even if you spent enough time in bed.","links":["https://www.mayoclinic.org/healthy-lifestyle/adult-health/expert-answers/how-many-hours-of-sleep-are-enough/faq-20057898"]},
+    {"text":"Risks of chronic sleep loss: Regularly sleeping less than 7 hours is linked to serious health concerns like weight gain, high blood pressure, diabetes, heart disease, and depression.","links":["https://www.mayoclinic.org/healthy-lifestyle/adult-health/expert-answers/how-many-hours-of-sleep-are-enough/faq-20057898"]},
+    {"text":"Aging and sleep patterns: While older adults need about the same amount of sleep as younger adults, they often experience lighter sleep, take longer to fall asleep, and wake up more frequently during the night.","links":["https://www.mayoclinic.org/healthy-lifestyle/adult-health/expert-answers/how-many-hours-of-sleep-are-enough/faq-20057898"]}
+  ],
+  "earth-water.html": [
+    {"text":"Approximately 71% of Earth's surface is covered by water, according to data from the U.S. Geological Survey and NASA Science for Kids.","links":["https://www.usgs.gov/water-science-school/science/how-much-water-there-earth","https://spaceplace.nasa.gov/water/en/"]},
+    {"text":"Saltwater vs. Freshwater: About 96.5% to 97.5% of Earth's total water is saline (ocean water), while only 2.5% to 3.5% is freshwater.","links":["https://www.usgs.gov/water-science-school/science/how-much-water-there-earth"]},
+    {"text":"Glaciers and Ice Caps: ~68.7% to 68%","links":["https://en.wikipedia.org/wiki/Water_distribution_on_Earth"]},
+    {"text":"Surface Water (Lakes, Rivers, Streams): ~0.3% or less","links":["https://en.wikipedia.org/wiki/Water_distribution_on_Earth"]},
+    {"text":"Total Volume: All of Earth's water (in the oceans, underground, in ice, and in the atmosphere) is estimated at about 1.386 billion cubic kilometers (332.5 million cubic miles).","links":["https://www.usgs.gov/water-science-school/science/how-much-water-there-earth"]}
+  ],
+  "mars-distance.html": [
+    {"text":"On average, Mars is about 140 million miles (225 million kilometers) away from Earth.","links":["https://www.nasa.gov/hrp/hazard-distance-from-earth/"]},
+    {"text":"Because both planets orbit the Sun at different speeds and along elliptical paths, the distance between them constantly changes:","links":["https://www.britannica.com/science/How-Long-Would-It-Take-to-Get-to-Mars"]},
+    {"text":"Closest approach: About 34.8 million to 35 million miles (54.6 million to 56 million kilometers) apart when they align on the same side of the Sun.","links":["https://www.space.com/16875-how-far-away-is-mars.html"]},
+    {"text":"Farthest distance: About 250 million miles (401 million kilometers) apart when they sit on opposite sides of the Sun.","links":["https://www.space.com/16875-how-far-away-is-mars.html"]},
+    {"text":"Light travel time: It takes light anywhere from roughly 3 minutes to over 22 minutes to travel between the two planets depending on their current positions (averaging about 13 minutes from the Sun to Mars).","links":["https://science.nasa.gov/mars/facts/"]},
+    {"text":"You can learn more about planetary metrics and mission planning via NASA Science: Mars Facts.","links":["https://science.nasa.gov/mars/facts/"]}
+  ],
+  "moon-travel.html": [
+    {"text":"It takes about 3 days for a crewed spacecraft to reach the Moon using direct trajectories.","links":["https://www.nasa.gov/directorates/smd/how-long-does-it-take-to-get-to-the-moon-mars-jupiter-we-asked-a-nasa-expert-episode-51/"]},
+    {"text":"Apollo 8 (Fastest crewed mission): 69 hours and 8 minutes (just under 3 days) to enter lunar orbit.","links":["https://www.space.com/how-long-does-it-take-to-get-to-the-moon"]},
+    {"text":"Apollo 11 (First Moon landing): 4 days, 6 hours, and 45 minutes from launch to landing.","links":["https://www.space.com/how-long-does-it-take-to-get-to-the-moon"]},
+    {"text":"Artemis I / Artemis II: Around 4 to 6 days to reach the Moon, depending on the mission profile and trajectory.","links":["https://www.space.com/how-long-does-it-take-to-get-to-the-moon"]},
+    {"text":"Fuel-saving or low-energy trajectories: Can take anywhere from weeks to several months by using complex orbital mechanics.","links":["https://www.space.com/how-long-does-it-take-to-get-to-the-moon"]},
+    {"text":"Fastest uncrewed flyby record: The New Horizons spacecraft reached the Moon's vicinity in 8 hours and 35 minutes on its way to Pluto.","links":["https://www.space.com/how-long-does-it-take-to-get-to-the-moon"]},
+    {"text":"By car (driving straight at 100 mph / 160 km/h): About 99 days.","links":["https://www.skyatnightmagazine.com/space-science/how-long-does-take-get-moon"]},
+    {"text":"On foot (walking continuously at 3.7 mph / 6 km/h): About 2,669 days (or roughly 7.3 years).","links":["https://www.skyatnightmagazine.com/space-science/how-long-does-take-get-moon"]}
+  ],
+  "ocean-depth.html": [
+    {"text":"The average depth of the world's ocean is 3,682 meters (12,080 feet), or about 2.3 miles (3.7 kilometers).","links":["https://oceanservice.noaa.gov/facts/oceandepth.html"]},
+    {"text":"Deepest Point: The Challenger Deep in the Mariana Trench is the deepest known location in the ocean, measuring roughly 10,935 meters (35,876 feet) deep.","links":["https://oceanservice.noaa.gov/facts/oceandepth.html"]},
+    {"text":"Deep Sea Definition: Depths of 200 meters (656 feet) and below are generally classified as the deep ocean, where sunlight no longer reaches.","links":["https://www.facebook.com/OceanExplorationResearch/posts/did-you-know-that-the-estimated-average-depth-of-the-ocean-is-3682-meters-or-120/410525817782847/"]},
+    {"text":"Comparisons: If Mount Everest (8,848 meters) were placed at the bottom of the Challenger Deep, its peak would still be covered by roughly 2,000 meters (over a mile) of water.","links":["https://www.youtube.com/shorts/DZ9v54D4mZ8"]},
+    {"text":"Learn more about global ocean dimensions and measurements through NOAA's National Ocean Service.","links":["https://oceanservice.noaa.gov/facts/oceandepth.html"]}
+  ]
+}
