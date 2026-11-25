@@ -13,6 +13,11 @@
 
 Entries that close a roadmap item carry the roadmap phase in italics.
 
+## 2026-11-24
+
+**Added**
+- `docs/UPSTREAMS.md`, the worklist for the biweekly upstream check (Google's results markup, the cited pages, the MV3 platform, Pages and Actions, dev dependencies), and `.github/dependabot.yml` (weekly npm and GitHub Actions, minor and patch grouped, majors ignored).
+
 ## 2026-11-23
 
 **Added**
