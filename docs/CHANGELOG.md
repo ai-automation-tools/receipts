@@ -13,6 +13,11 @@
 
 Entries that close a roadmap item carry the roadmap phase in italics.
 
+## 2026-11-25
+
+**Changed**
+- Upstream check: queued moving the workflows off Node 20 actions (a roadmap item), and recorded which rows of `docs/UPSTREAMS.md` were checked.
+
 ## 2026-11-24
 
 **Added**
