@@ -68,6 +68,7 @@ Nothing below blocks go-live.
 - [ ] **P3: other surfaces.** Perplexity, then Bing Copilot, each behind its own saved fixtures and the same network test.
 - [ ] `small` **Keyboard shortcut (C1).** One shortcut runs Check on the current tab, listed in the README.
 - [ ] **In-page badges (C2).** A status badge placed next to each claim in the overview itself, built with DOM methods, never `innerHTML`.
+- [ ] **Say when a cited page is paywalled.** When a cited page fetched logged out declares itself paywalled in its JSON-LD (`isAccessibleForFree: false`, at the top level or on a `hasPart` element, the markup Google asks paywalled publishers to use), a claim that comes back `not located` on that page adds "this page marks its content as paywalled; Receipts reads it logged out, so the passage may be behind the paywall" in the popup and the copied report. The four status words don't change, `src/matcher.js` doesn't change (the markup is read in `background.js` from the HTML already fetched, with no extra request), and the note is built with `textContent`. Done when a test over a saved paywalled fixture page and a free one shows the note on the first and not the second, the network test still sees only cited URLs, and `npm run lint`, `npm test`, `npm run build` and `npm run eval` pass. (source: https://niemanlab.org/2026/05/google-highlights-links-from-subscribed-publications-in-new-ai-overviews-update, 2026-05-06; https://developers.google.com/search/docs/appearance/structured-data/paywalled-content, 2026-11-27)
 
 ### 📣 Publish and promote
 
