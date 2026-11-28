@@ -13,6 +13,13 @@
 
 Entries that close a roadmap item carry the roadmap phase in italics.
 
+## Unreleased
+
+- `CLAUDE.md` is gone: Claude Code reads `AGENTS.md` directly.
+
+**Added**
+- Roadmap: **Say when a cited page is paywalled**, at the end of the next slices. From the 2026-11-27 roadmap refresh: since May 2026 Google flags and surfaces links from publications a user subscribes to in AI Overviews, and Receipts reads every cited page logged out, so a claim on a paywalled page reads `not located` with no hint why. *After public release*
+
 ## 2026-11-25
 
 **Changed**
